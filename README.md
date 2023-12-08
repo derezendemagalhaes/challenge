@@ -104,5 +104,5 @@ See [CHANGELOG.md](CHANGELOG.md)
 
 ## Contact
 
-Larissa Magalhaes ([larissa_challenge@flix.com](mailto:larissa_challenge@flix.com))
+Larissa Magalhaes ([larissa@challenge.com](mailto:larissa@chalenge.com))
 
