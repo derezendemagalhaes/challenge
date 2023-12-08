@@ -1,10 +1,22 @@
 from flask import Flask, render_template, jsonify
 import pandas as pd
+from cloudpathlib import AnyPath
+from args import argument_parser  
 
 app = Flask(__name__)
 
-# Load the dataset
-dataset = pd.read_csv('ride-data.csv')
+# Parse command line arguments
+args = argument_parser().parse_args()
+
+# Use the value of ride-data-path from the command line arguments
+ride_data_path = args.ride_data_path
+
+if ride_data_path is None:
+    raise ValueError("Please provide the path to the ride data file using --ride-data-path")
+
+# Load the dataset from the specified path using AnyPath
+dataset_path = AnyPath(ride_data_path)
+dataset = pd.read_csv(dataset_path)
 
 # Create a route for the index page
 @app.route('/')
@@ -17,7 +29,7 @@ def average_duration(country):
     try:
         # Filter dataset for the given country
         country_data = dataset[dataset['from_country'] == country]
-        
+
         # Check if there is data for the given country
         if country_data.empty:
             raise Exception(f"No data available for '{country}'")
