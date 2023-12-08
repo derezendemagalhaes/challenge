@@ -2,3 +2,4 @@ flask
 pandas
 pytest
 cloudpathlib[s3]
+faker

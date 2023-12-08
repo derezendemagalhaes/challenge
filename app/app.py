@@ -1,46 +1,85 @@
-from flask import Flask, render_template, jsonify
+"""
+File that contains a Flask web application for analyzing bus ride data.
+"""
 import pandas as pd
 from cloudpathlib import AnyPath
-from args import argument_parser  
+from flask import Flask, render_template, jsonify
 
-app = Flask(__name__)
+class BusRideAnalyzer:
+    """
+    Class for analyzing bus ride data using a Flask web application.
+    """
 
-# Parse command line arguments
-args = argument_parser().parse_args()
+    def __init__(self, ride_data_path=None):
+        """
+        Initializes the BusRideAnalyzer.
 
-# Use the value of ride-data-path from the command line arguments
-ride_data_path = args.ride_data_path
+        Parameters:
+        - ride_data_path (str): Path to the CSV file containing ride data.
+        """
+        self.initialize(ride_data_path)
 
-if ride_data_path is None:
-    raise ValueError("Please provide the path to the ride data file using --ride-data-path")
+    def initialize(self, ride_data_path):
+        """
+        Initializes the Flask app and loads the dataset.
 
-# Load the dataset from the specified path using AnyPath
-dataset_path = AnyPath(ride_data_path)
-dataset = pd.read_csv(dataset_path)
+        Parameters:
+        - ride_data_path (str): Path to the CSV file containing ride data.
+        """
+        self.app = Flask(__name__)
+        self.ride_data_path = ride_data_path
 
-# Create a route for the index page
-@app.route('/')
-def index():
-    return render_template('index.html')
+        if self.ride_data_path is not None:
+            self.load_dataset()
+    
+        self.create_routes()
 
-# Create a route for the API endpoint
-@app.route('/<country>')
-def average_duration(country):
-    try:
-        # Filter dataset for the given country
-        country_data = dataset[dataset['from_country'] == country]
+    def load_dataset(self):
+        """
+        Loads the dataset from the specified CSV file path.
+        """
+        self.dataset_path = AnyPath(self.ride_data_path)
+        self.dataset = pd.read_csv(self.dataset_path)
 
-        # Check if there is data for the given country
-        if country_data.empty:
-            raise Exception(f"No data available for '{country}'")
+    def create_routes(self):
+        """
+        Defines Flask routes for the web application.
+        """
+        @self.app.route('/')
+        def index():
+            """
+            Renders the index.html template.
 
-        # Calculate average duration in seconds and round to the nearest integer
-        avg_duration = round(country_data['duration'].mean())
-        return jsonify({'average_duration': avg_duration})
+            Returns:
+            - rendered HTML template
+            """
+            return render_template('index.html')
 
-    except Exception as e:
-        return jsonify({'error': str(e)}), 404
+        @self.app.route('/<string:country>')
+        def average_duration(country):
+            """
+            Calculates and returns the average duration of bus rides for a given country.
 
-# Run the app
-if __name__ == '__main__':
-    app.run(debug=True)
+            Parameters:
+            - country (str): The country for which to calculate the average duration.
+
+            Returns:
+            - JSON response with the average duration or an error message.
+            """
+            try:
+                country_data = self.dataset[self.dataset['from_country'] == country]
+
+                if country_data.empty:
+                    raise Exception(f"No data available for '{country}'")
+
+                avg_duration = round(country_data['duration'].mean())
+                return jsonify({'average_duration': avg_duration})
+
+            except Exception as e:
+                return jsonify({'error': str(e)}), 404
+
+    def run(self):
+        """
+        Runs the Flask web application.
+        """
+        self.app.run(debug=True)
