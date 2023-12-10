@@ -43,7 +43,7 @@ Pre-requirements:
 Clone the git repository:
 
 ```bash
-git clone git@github.com:derezendemagalhaes/challenge.git
+git clone https://github.com/derezendemagalhaes/challenge.git
 ```
 
 It is recommended to create firstly a virtual environment of your choice (e.g. conda):
