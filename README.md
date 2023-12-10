@@ -121,6 +121,10 @@ option_settings:
 ./deploy.sh
 ```
 
+## Notes
+Typically, I would have set up pre-commit hooks with tools like Black and MyPy for code formatting and type checking. 
+However, for the purpose of this challenge, these configurations haven't been applied.
+
 ## Changelog
 
 See [CHANGELOG.md](CHANGELOG.md)
@@ -130,4 +134,3 @@ See [CHANGELOG.md](CHANGELOG.md)
 ## Contact
 
 Larissa Magalhaes ([larissa@challenge.com](mailto:larissa@chalenge.com))
-
