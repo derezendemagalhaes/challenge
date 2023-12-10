@@ -38,10 +38,11 @@ class BusRideAnalyzer:
 
     def load_dataset(self: 'BusRideAnalyzer') -> None:
         """
-        Loads the dataset from the specified CSV file path.
+        Loads the dataset from the specified CSV file path and pre-processes it.
         """
         self.dataset_path = AnyPath(self.ride_data_path)
         self.dataset = pd.read_csv(self.dataset_path)
+        self.avg_duration_per_country = self.dataset.groupby('from_country')['duration'].mean().to_dict()
 
     def create_routes(self: 'BusRideAnalyzer') -> None:
         """
@@ -61,6 +62,7 @@ class BusRideAnalyzer:
         def average_duration(country: str) -> 'Response':
             """
             Calculates and returns the average duration of bus rides for a given country.
+            Utilizes pre-processed data for efficiency.
 
             Parameters:
             - country (str): The country for which to calculate the average duration.
@@ -69,16 +71,16 @@ class BusRideAnalyzer:
             - JSON response with the average duration or an error message.
             """
             try:
-                country_data = self.dataset[self.dataset['from_country'] == country]
+                if country not in self.avg_duration_per_country:
+                    raise ValueError(f"No data available for '{country}'")
 
-                if country_data.empty:
-                    return jsonify({"error": f"No data available for '{country}'"}), 404
-
-                avg_duration = round(country_data['duration'].mean())
+                avg_duration = round(self.avg_duration_per_country[country])
                 return jsonify({'average_duration': avg_duration})
 
+            except ValueError as e:
+                return jsonify({'error': str(e)}), 404
             except Exception as e:
-                return jsonify({"error": str(e)}), 500
+                return jsonify({'error': str(e)}), 500
 
     def run(self: 'BusRideAnalyzer') -> None:
         """

@@ -93,9 +93,20 @@ To access the country average ride duration in seconds the `country_code` should
 ```bash
 curl http://127.0.0.1:5000/<country_code>
 ```
-
-
 ----
+## DEPLOYMENT
+For the deployment of the Flask API on AWS Elastic Beanstalk using Docker and Amazon Elastic Container Registry (ECR), a set of essential scripts and configuration files has been developed. These resources aim to automate and simplify the deployment process. To deploy the following set up would be required:
+
+1. Configure the Dockerfile and make the `deploy.sh` script executable:
+```bash
+chmod +x deploy.sh
+```
+2. AWS Elastic Beanstalk was configured on: `.ebextensions/01_flask.config`
+3. Add the references to the correct ECR repository URI to the Dockerfile.
+4. Run the deployment script to deploy:
+```bash
+./deploy.sh
+```
 
 ## CHANGELOG
 

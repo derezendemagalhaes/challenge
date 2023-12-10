@@ -1,16 +1,16 @@
 #!/bin/bash
 
-set -e  # Exit immediately if a command exits with a non-zero status
-
 # Set your AWS region
-AWS_REGION="your-aws-region"
+export AWS_REGION="your-aws-region"
 
 # Set your Elastic Beanstalk application and environment names
-EB_APPLICATION_NAME="your-application-name"
-EB_ENVIRONMENT_NAME="your-environment-name"
+export EB_APPLICATION_NAME="your-application-name"
+export EB_ENVIRONMENT_NAME="your-environment-name"
 
 # Set your ECR repository URI
-ECR_REPO_URI="your-ecr-repository-uri"
+export ECR_REPO_URI="your-ecr-repository-uri"
+
+# Set AWS credentials using environment variables or AWS profiles
 
 # Build and push Docker image to ECR
 $(aws ecr get-login --no-include-email --region $AWS_REGION)
