@@ -13,11 +13,6 @@ def parse_arguments():
     return parser.parse_args()
 
 if __name__ == '__main__':
-    # Parse command-line arguments
     args = parse_arguments()
-
-    # Instantiate BusRideAnalyzer with the provided ride data path
     bus_ride_analyzer = BusRideAnalyzer(ride_data_path=args.ride_data_path)
-    
-    # Run the Flask application
     bus_ride_analyzer.run()

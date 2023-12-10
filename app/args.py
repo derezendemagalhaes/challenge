@@ -17,5 +17,5 @@ def argument_parser() -> argparse.ArgumentParser:
         required=True,
         help="Path to a ride data file.",
     )
-    
+
     return parser
