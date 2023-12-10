@@ -80,15 +80,7 @@ python run.py -h
 Example command to initialize the API:
 
 ```bash
-python run.py \
---ride-data-path ride-data.csv
-```
-
-Or
-
-```bash
-python run.py \
---ride-data-path s3://challenge-flix/ride-data.csv
+python run.py --ride-data-path ride-data.csv
 ```
 The API index can be called via browser on:
 
