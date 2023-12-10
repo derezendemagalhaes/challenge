@@ -105,9 +105,22 @@ For the deployment of the Flask API on AWS Elastic Beanstalk using Docker and Am
 ```bash
 chmod +x deploy.sh
 ```
-2. AWS Elastic Beanstalk was configured on: `.ebextensions/01_flask.config`
-3. Add the references to the correct ECR repository URI to the Dockerfile.
-4. Run the deployment script to deploy:
+2. Create a file named `.ebignore` to specify files and directories that should be excluded from deployment.
+
+3. Install the AWS Command Line Interface (CLI) and configure it with your AWS credentials.
+```bash
+pip install awscli
+aws configure
+```
+4. Create a file named .ebextensions/01_flask.config to configure your Elastic Beanstalk environment:
+```bash
+#.ebextensions/01_flask.config
+option_settings:
+  aws:elasticbeanstalk:container:python:
+    WSGIPath: app:app
+```
+5. Add the references to the correct ECR repository URI to the Dockerfile.
+6. Run the deployment script to deploy:
 ```bash
 ./deploy.sh
 ```
