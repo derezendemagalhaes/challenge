@@ -40,6 +40,12 @@ Pre-requirements:
 - pip
 - (anaconda or other virtual environment)
 
+Clone the git repository:
+
+```bash
+git clone git@github.com:derezendemagalhaes/challenge.git
+```
+
 It is recommended to create firstly a virtual environment of your choice (e.g. conda):
 
 ```bash
@@ -52,7 +58,7 @@ Afterwards activate it:
 conda activate challenge
 ```
 
-Next install the desired release with pip:
+Next navigate to the challenge root directory and install the environment requirements with pip:
 
 ```bash
 pip install -r requirements.txt
@@ -77,7 +83,11 @@ Example command to initialize the API:
 python run.py \
 --csv-data-path /path/to/ride-data.csv
 ```
-
+Or
+```bash
+python run.py \
+--csv-data-path s3://challenge-flix/ride-data.csv
+```
 The API index can be called via browser on:
 
 ```bash
@@ -94,7 +104,7 @@ To access the country average ride duration in seconds the `country_code` should
 curl http://127.0.0.1:5000/<country_code>
 ```
 ----
-## DEPLOYMENT
+## Deployment
 For the deployment of the Flask API on AWS Elastic Beanstalk using Docker and Amazon Elastic Container Registry (ECR), a set of essential scripts and configuration files has been developed. These resources aim to automate and simplify the deployment process. To deploy the following set up would be required:
 
 1. Configure the Dockerfile and make the `deploy.sh` script executable:
@@ -108,7 +118,7 @@ chmod +x deploy.sh
 ./deploy.sh
 ```
 
-## CHANGELOG
+## Changelog
 
 See [CHANGELOG.md](CHANGELOG.md)
 
