@@ -28,7 +28,9 @@ Challenge
 
 The purpose of this module is to implement an API that calculates the average ride duration in seconds per
 country. The input csv data should contains two country columns `from_country` and  `to_country`. This module 
-uses the `from_country` column to calculate the averages.
+uses the `from_country` and `duration` columns to calculate the averages. With the `duration` column containing
+the duration of the ride in seconds and the `from_country` column containing the two-letter country code 
+(conforming to [ISO 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
 
 ----
 
@@ -73,7 +75,7 @@ Example command to initialize the API:
 
 ```bash
 python run.py \
---project-tiles-path /path/to/ride-data.csv
+--csv-data-path /path/to/ride-data.csv
 ```
 
 The API index can be called via browser on:
@@ -91,7 +93,6 @@ To access the country average ride duration in seconds the `country_code` should
 ```bash
 curl http://127.0.0.1:5000/<country_code>
 ```
-The `country_code` is a two-letter country code (conforming to [ISO 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
 
 
 ----
