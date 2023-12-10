@@ -26,11 +26,7 @@ Challenge
 
 ## Description
 
-The purpose of this module is to implement an API that calculates the average ride duration in seconds per
-country. The input csv data should contains two country columns `from_country` and  `to_country`. This module 
-uses the `from_country` and `duration` columns to calculate the averages. With the `duration` column containing
-the duration of the ride in seconds and the `from_country` column containing the two-letter country code 
-(conforming to [ISO 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+This module is designed to create an API that computes the average duration of bus rides in seconds for each country. The input data in CSV format is expected to have two columns: from_country and to_country. The module utilizes the from_country and duration columns to calculate the averages. The duration column holds the ride duration in seconds, while the from_country column contains the two-letter country code, following the standards of [ISO 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
 
 ----
 
