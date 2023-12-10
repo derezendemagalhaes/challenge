@@ -72,13 +72,13 @@ class BusRideAnalyzer:
                 country_data = self.dataset[self.dataset['from_country'] == country]
 
                 if country_data.empty:
-                    raise Exception(f"No data available for '{country}'")
+                    return jsonify({"error": f"No data available for '{country}'"}), 404
 
                 avg_duration = round(country_data['duration'].mean())
                 return jsonify({'average_duration': avg_duration})
 
             except Exception as e:
-                return jsonify({'error': str(e)}), 404
+                return jsonify({"error": str(e)}), 500
 
     def run(self: 'BusRideAnalyzer') -> None:
         """
