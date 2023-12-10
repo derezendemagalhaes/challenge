@@ -85,17 +85,17 @@ python run.py --ride-data-path ride-data.csv
 The API index can be called via browser on:
 
 ```bash
-http://127.0.0.1:5000/
+http://127.0.0.1:8000/
 ```
 
 Or via curl:
 ```bash
-curl http://127.0.0.1:5000/
+curl http://127.0.0.1:8000/
 ```
 
 To access the country average ride duration in seconds the `country_code` should be provided as such:
 ```bash
-curl http://127.0.0.1:5000/<country_code>
+curl http://127.0.0.1:8000/<country_code>
 ```
 ----
 ## Deployment
