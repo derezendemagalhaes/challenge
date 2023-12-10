@@ -4,13 +4,15 @@ File that contains a Flask web application for analyzing bus ride data.
 import pandas as pd
 from cloudpathlib import AnyPath
 from flask import Flask, render_template, jsonify
+from typing import Optional
+from werkzeug.wrappers import Response
 
 class BusRideAnalyzer:
     """
     Class for analyzing bus ride data using a Flask web application.
     """
 
-    def __init__(self, ride_data_path=None):
+    def __init__(self: 'BusRideAnalyzer', ride_data_path: Optional[str] = None) -> None:
         """
         Initializes the BusRideAnalyzer.
 
@@ -19,7 +21,7 @@ class BusRideAnalyzer:
         """
         self.initialize(ride_data_path)
 
-    def initialize(self, ride_data_path):
+    def initialize(self: 'BusRideAnalyzer', ride_data_path: Optional[str]) -> None:
         """
         Initializes the Flask app and loads the dataset.
 
@@ -34,19 +36,19 @@ class BusRideAnalyzer:
     
         self.create_routes()
 
-    def load_dataset(self):
+    def load_dataset(self: 'BusRideAnalyzer') -> None:
         """
         Loads the dataset from the specified CSV file path.
         """
         self.dataset_path = AnyPath(self.ride_data_path)
         self.dataset = pd.read_csv(self.dataset_path)
 
-    def create_routes(self):
+    def create_routes(self: 'BusRideAnalyzer') -> None:
         """
         Defines Flask routes for the web application.
         """
         @self.app.route('/')
-        def index():
+        def index() -> 'Response':
             """
             Renders the index.html template.
 
@@ -56,7 +58,7 @@ class BusRideAnalyzer:
             return render_template('index.html')
 
         @self.app.route('/<string:country>')
-        def average_duration(country):
+        def average_duration(country: str) -> 'Response':
             """
             Calculates and returns the average duration of bus rides for a given country.
 
@@ -78,7 +80,7 @@ class BusRideAnalyzer:
             except Exception as e:
                 return jsonify({'error': str(e)}), 404
 
-    def run(self):
+    def run(self: 'BusRideAnalyzer') -> None:
         """
         Runs the Flask web application.
         """
