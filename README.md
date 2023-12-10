@@ -122,8 +122,8 @@ option_settings:
 ```
 
 ## Notes
-Typically, I would have set up pre-commit hooks with tools like `Black` and `MyPy` for code formatting and type checking. 
-However, for the purpose of this challenge, these configurations haven't been applied.
+Typically, pre-commit hooks should have been set up  with tools like `Black` and `MyPy` for code formatting and type checking. 
+However, for the scope of this challenge, these configurations haven't been applied.
 
 ## Changelog
 
