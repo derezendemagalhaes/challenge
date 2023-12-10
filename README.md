@@ -81,12 +81,14 @@ Example command to initialize the API:
 
 ```bash
 python run.py \
---csv-data-path /path/to/ride-data.csv
+--ride-data-path ride-data.csv
 ```
+
 Or
+
 ```bash
 python run.py \
---csv-data-path s3://challenge-flix/ride-data.csv
+--ride-data-path s3://challenge-flix/ride-data.csv
 ```
 The API index can be called via browser on:
 

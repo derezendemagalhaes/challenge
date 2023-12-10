@@ -86,4 +86,4 @@ class BusRideAnalyzer:
         """
         Runs the Flask web application.
         """
-        self.app.run(host='0.0.0.0', port=5000, debug=False)
+        self.app.run(host='0.0.0.0', port=8000, debug=False)
